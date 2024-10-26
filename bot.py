@@ -23,22 +23,29 @@ departmental_election_date = datetime(2025, 5, 11)  # Elecciones departamentales
 
 # Obtener fecha actual
 today = datetime.now()
+today = today.replace(hour=0, minute=0, second=0, microsecond=0)
 
 # Función para calcular los días restantes
 def days_until(date):
     delta = date - today
     return delta.days
 
+def generate_tweet(election_name, days_left):
+    if days_left == 0:
+        return f"Buen día! Hoy es {election_name} en Uruguay 🇺🇾."
+    else:
+        return f"Buen día! Falta{'n' if days_left != 1 else ''} {days_left + 1} día{'s' if days_left != 1 else ''} para {election_name} en Uruguay 🇺🇾."
+
 # Definir el tweet en función de la fecha actual
-if today < first_round_date:
+if today <= first_round_date:
     days_left = days_until(first_round_date)
-    tweet_text = f"Buen día! Faltan {days_left} días para la primera vuelta electoral en Uruguay 🇺🇾."
-elif today < second_round_date:
+    tweet_text = generate_tweet("la primera vuelta electoral", days_left)
+elif today <= second_round_date:
     days_left = days_until(second_round_date)
-    tweet_text = f"Buen día! Faltan {days_left} días para la segunda vuelta electoral en Uruguay 🇺🇾."
-elif today < departmental_election_date:
+    tweet_text = generate_tweet("la segunda vuelta electoral", days_left)
+elif today <= departmental_election_date:
     days_left = days_until(departmental_election_date)
-    tweet_text = f"Buen día! Faltan {days_left} días para las elecciones departamentales en Uruguay 🇺🇾."
+    tweet_text = generate_tweet("las elecciones departamentales", days_left)
 else:
     tweet_text = "No hay más elecciones programadas por ahora en Uruguay 🇺🇾."
 
