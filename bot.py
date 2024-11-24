@@ -34,7 +34,7 @@ def generate_tweet(election_name, days_left):
     if days_left == 0:
         return f"Buen día! Hoy es {election_name} en Uruguay 🇺🇾."
     else:
-        return f"Buen día! Falta{'n' if days_left != 1 else ''} {days_left + 1} día{'s' if days_left != 1 else ''} para {election_name} en Uruguay 🇺🇾."
+        return f"Buen día! Falta{'n' if days_left != 1 else ''} {days_left} día{'s' if days_left != 1 else ''} para {election_name} en Uruguay 🇺🇾."
 
 # Definir el tweet en función de la fecha actual
 if today <= first_round_date:
